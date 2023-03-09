@@ -3,7 +3,6 @@ import config from '../../config';
 const HAPPINESS_FACTOR = config.happinessFactor;
 const DEFAULT_HAPPINESS = config.defaultHappiness;
 const MIN_HAPPINESS = 0.01;
-
 class Happiness {
   private happiness: number;
   private questionCount: number;

@@ -36,7 +36,7 @@ interface AwakeResponse {
 export const Main: React.FunctionComponent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [happiness, setHappiness] = useState<number>(0.5);
-  const [question] = useState<string>('should i use `sudo` for good luck?');
+  const [question, setQuestion] = useState<string>('can i use --force in my git commands for good luck?');
   const [active, setActive] = useState<boolean>(false);
 
   const getHappiness = async () => {
@@ -45,6 +45,14 @@ export const Main: React.FunctionComponent = () => {
       .then((res) => res.data)
       .then((happinessResp) => happinessResp.happiness);
     setHappiness(happinessValue);
+  };
+
+  const getQuestion = async () => {
+    const questionValue = await axios
+      .get<QuestionResponse>('/api/question')
+      .then((res) => res.data)
+      .then((questionResp) => questionResp.question);
+    setQuestion(questionValue);
   };
 
   const checkIfClassActive = async () => {
@@ -56,6 +64,11 @@ export const Main: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
+
+    socket.on('question', (question: string) => {
+      setQuestion(question);
+    });
+
     socket.on('happiness', (happiness: number) => {
       setHappiness(happiness);
     });
@@ -74,12 +87,12 @@ export const Main: React.FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    Promise.all([getHappiness()])
+    Promise.all([getHappiness(), getQuestion()])
       .then(() => {
         setLoaded(true);
       })
       .catch((err) => {
-        throw new Error(`Failed to contact the Buka Buka service: ${err}`);
+        throw new Error(`Failed to contact the buka buka service: ${err}`);
       });
   }, []);
 
@@ -89,8 +102,8 @@ export const Main: React.FunctionComponent = () => {
   const text = loaded
     ? question
       ? question
-      : "this is buka buka the turtle. buka buka loves questions from students. no questions make buka buka sad. you don't want to make buka buka sad."
-    : 'buka buka cannot be reached. the code next staff is saddened.';
+      : "this is buka buka the turtle. buka buka loves questions from web.lab students. no questions make buka buka sad. you don't want to make buka buka sad."
+    : 'buka buka cannot be reached. the weblab staff is saddened.';
 
   const textWhenNotInClass = 'buka buka is resting';
   return (
@@ -98,9 +111,9 @@ export const Main: React.FunctionComponent = () => {
       <div className="container">
         <div className="title white-text">{active ? text : textWhenNotInClass} </div>
         {active ? (
-          <img className={`buka-image-${buka_size}`} src={images[buka_number] || buka_2} alt="buka buka" />
+          <img className={`buka-image-${buka_size}`} src={images[buka_number] || buka_2}  alt="buka buka"/>
         ) : (
-          <img className={`buka-image-5`} src={sleepingBuka} alt="sleeping buka buka" />
+          <img className={`buka-image-5`} src={sleepingBuka} alt="sleeping buka buka"/>
         )}
       </div>
     </div>

@@ -15,7 +15,6 @@ class BukaBukaService {
     this.happiness = new Happiness();
   }
 
-
   start() {
     this.awake = true;
     this.emitState()
