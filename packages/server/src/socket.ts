@@ -1,7 +1,7 @@
 import type http from 'http';
 import { Server } from 'socket.io';
 
-let io: Server;
+let io: any; // any because using Server as a type make TS confused: ('Server' only refers to a type, but is being used as a value here.)
 
 export const startSockets = (server: http.Server): void => {
   io = new Server(server);
