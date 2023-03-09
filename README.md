@@ -1,10 +1,10 @@
 # Buka buka
 
-This is  bukabuka: 🐢
+This is  Buka buka: 🐢
 
-Bukabuka loves questions from weblab students. 
+Buka buka loves GET & POST requests from code next students. 
 
-No questions make buka buka sad. 
+No requests make Buka buka sad. 
 
 You don't want to make Bukabuka sad.
 
