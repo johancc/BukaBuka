@@ -64,11 +64,6 @@ export const Main: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-
-    socket.on('question', (question: string) => {
-      setQuestion(question);
-    });
-
     socket.on('happiness', (happiness: number) => {
       setHappiness(happiness);
     });
@@ -102,8 +97,8 @@ export const Main: React.FunctionComponent = () => {
   const text = loaded
     ? question
       ? question
-      : "this is buka buka the turtle. buka buka loves questions from web.lab students. no questions make buka buka sad. you don't want to make buka buka sad."
-    : 'buka buka cannot be reached. the weblab staff is saddened.';
+      : "this is buka buka the turtle. buka buka loves GET and POST requests from codenext. no requests make buka buka sad. you don't want to make buka buka sad."
+    : 'buka buka cannot be reached. the codenext staff is saddened.';
 
   const textWhenNotInClass = 'buka buka is resting';
   return (
@@ -111,9 +106,9 @@ export const Main: React.FunctionComponent = () => {
       <div className="container">
         <div className="title white-text">{active ? text : textWhenNotInClass} </div>
         {active ? (
-          <img className={`buka-image-${buka_size}`} src={images[buka_number] || buka_2}  alt="buka buka"/>
+          <img className={`buka-image-${buka_size}`} src={images[buka_number] || buka_2} alt="buka buka" />
         ) : (
-          <img className={`buka-image-5`} src={sleepingBuka} alt="sleeping buka buka"/>
+          <img className={`buka-image-5`} src={sleepingBuka} alt="sleeping buka buka" />
         )}
       </div>
     </div>
