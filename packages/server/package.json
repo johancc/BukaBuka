@@ -1,0 +1,33 @@
+{
+  "name": "@bukabuka/server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha \"dist/test/**/*.spec.js\"",
+    "build": "cd src && tsc --build",
+    "start": "node ./dist/server-main.js"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "googleapis": "^66.0.0",
+    "morgan": "^1.10.0",
+    "socket.io": "^3.0.4"
+  },
+  "files": [
+    "dist",
+    "src",
+    "!dist/test",
+    "!dist/tsconfig.tsbuildinfo"
+  ],
+  "license": "MIT",
+  "repository": "git@github.com:weblab-staff/BukaBuka.git",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}

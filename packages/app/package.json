@@ -1,0 +1,29 @@
+{
+  "name": "@bukabuka/app",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run bundle:prod",
+    "bundle:prod": "webpack --mode production",
+    "bundle:dev": "webpack --mode development --devtool source-map",
+    "test": "mocha \"dist/test/**/*.spec.js\"",
+    "start": "webpack serve --mode development --open",
+    "prepack": "npm build"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "files": [
+    "dist",
+    "src",
+    "!dist/test",
+    "!dist/tsconfig.tsbuildinfo"
+  ],
+  "license": "MIT",
+  "repository": "git@github.com:weblab-staff/BukaBuka.git",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}
