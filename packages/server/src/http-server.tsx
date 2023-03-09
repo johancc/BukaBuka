@@ -3,10 +3,8 @@ import express from 'express';
 import compression from 'compression';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
 import ApiRouter from './routers/ApiRouter';
 import http from 'http';
-import config from './config';
 
 const appBundleDirectory = path.resolve(__dirname, '..', '..', 'app', 'dist');
 

@@ -25,7 +25,7 @@
     "!dist/tsconfig.tsbuildinfo"
   ],
   "license": "MIT",
-  "repository": "git@github.com:weblab-staff/BukaBuka.git",
+  "repository": "git@github.com:johancc/BukaBuka.git",
   "private": true,
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,5 @@
 # Buka buka
 
-[![Build Status](https://github.com/weblab-staff/Bukabuka/workflows/tests/badge.svg)](https://github.com/weblab-staff/Bukabuka/actions)
-
 This is  bukabuka: 🐢
 
 Bukabuka loves questions from weblab students. 
