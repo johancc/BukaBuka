@@ -15,6 +15,10 @@ import './main.scss';
 const bukaBukaThoughts = [
   "my best friends name is shelby. she's my shell-bae",
   "i'm shell-dom awake",
+  "i'm awake! quick! run for shell-ter",
+  "what do you call a famous turtle? a shell-lebrity",
+  "what kind of photos does a turtle take? shellfies",
+  "what does a turtle do their birthday? they shell-lebrate",
 ];
 
 const images = {
@@ -56,7 +60,7 @@ export const Main: React.FunctionComponent = () => {
   };
 
   const getRandomTurtlePun = () => {
-    return bukaBukaThoughts[Math.floor(Math.random() * bukaBukaThoughts.length)];
+    return bukaBukaThoughts[Math.floor(Math.random() * bukaBukaThoughts.length)] || '😴';
   }
 
   const checkIfClassActive = async () => {
