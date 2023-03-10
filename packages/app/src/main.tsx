@@ -25,10 +25,6 @@ interface HappinessResponse {
   happiness: number;
 }
 
-interface QuestionResponse {
-  question: string;
-}
-
 interface AwakeResponse {
   awake: boolean;
 }
@@ -36,7 +32,8 @@ interface AwakeResponse {
 export const Main: React.FunctionComponent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [happiness, setHappiness] = useState<number>(0.5);
-  const [question, setQuestion] = useState<string>('can i use --force in my git commands for good luck?');
+  const [count, setCount] = useState<number>(0);
+  const [question] = useState<string>('can i use --force in my git commands for good luck?');
   const [active, setActive] = useState<boolean>(false);
 
   const getHappiness = async () => {
@@ -45,14 +42,6 @@ export const Main: React.FunctionComponent = () => {
       .then((res) => res.data)
       .then((happinessResp) => happinessResp.happiness);
     setHappiness(happinessValue);
-  };
-
-  const getQuestion = async () => {
-    const questionValue = await axios
-      .get<QuestionResponse>('/api/question')
-      .then((res) => res.data)
-      .then((questionResp) => questionResp.question);
-    setQuestion(questionValue);
   };
 
   const checkIfClassActive = async () => {
@@ -66,12 +55,15 @@ export const Main: React.FunctionComponent = () => {
   useEffect(() => {
     socket.on('happiness', (happiness: number) => {
       setHappiness(happiness);
+      setCount(count + 1);
     });
     socket.on('awake', () => {
       setActive(true);
+      setCount(count + 1);
     });
     socket.on('sleep', () => {
       setActive(false);
+      setCount(count + 1);
     });
   }, []);
 
@@ -82,7 +74,7 @@ export const Main: React.FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    Promise.all([getHappiness(), getQuestion()])
+    Promise.all([getHappiness()])
       .then(() => {
         setLoaded(true);
       })
@@ -105,6 +97,7 @@ export const Main: React.FunctionComponent = () => {
     <div className="dark-blue-bg">
       <div className="container">
         <div className="title white-text">{active ? text : textWhenNotInClass} </div>
+        <div className="white-text"> Number of new POST requests: {count}</div>
         {active ? (
           <img className={`buka-image-${buka_size}`} src={images[buka_number] || buka_2} alt="buka buka" />
         ) : (
