@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios, { AxiosError } from 'axios';
 import socket from './client-socket';
 
@@ -36,6 +36,11 @@ export const Main: React.FunctionComponent = () => {
   const [question] = useState<string>('can i use --force in my git commands for good luck?');
   const [active, setActive] = useState<boolean>(false);
 
+  // ~ hacks ~
+  //  https://stackoverflow.com/questions/64010671/accessing-state-from-callback
+  const counterRef = useRef(count);
+  useEffect(() => { counterRef.current = count }, [count]);
+
   const getHappiness = async () => {
     const happinessValue = await axios
       .get<HappinessResponse>('/api/happiness')
@@ -55,15 +60,15 @@ export const Main: React.FunctionComponent = () => {
   useEffect(() => {
     socket.on('happiness', (happiness: number) => {
       setHappiness(happiness);
-      setCount(count + 1);
+      setCount(counterRef.current + 1);
     });
     socket.on('awake', () => {
       setActive(true);
-      setCount(count + 1);
+      setCount(counterRef.current + 1);
     });
     socket.on('sleep', () => {
       setActive(false);
-      setCount(count + 1);
+      setCount(counterRef.current + 1);
     });
   }, []);
 
