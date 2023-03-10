@@ -44,6 +44,7 @@ _Request_
 `POST /api/happiness`
 
 Required Params:
+` {happiness: number}`
 
 _Response_
 
