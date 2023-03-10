@@ -33,7 +33,7 @@ export const Main: React.FunctionComponent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [happiness, setHappiness] = useState<number>(0.5);
   const [count, setCount] = useState<number>(0);
-  const [question] = useState<string>('can i use --force in my git commands for good luck?');
+  const [question] = useState<string>('hello!');
   const [active, setActive] = useState<boolean>(false);
 
   // ~ hacks ~
