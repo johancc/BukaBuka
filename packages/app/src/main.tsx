@@ -12,6 +12,11 @@ import sleepingBuka from './images/buka_sleep.png';
 
 import './main.scss';
 
+const bukaBukaThoughts = [
+  "my best friends name is shelby. she's my shell-bae",
+  "i'm shell-dom awake",
+];
+
 const images = {
   0: buka_0,
   1: buka_1,
@@ -33,11 +38,11 @@ export const Main: React.FunctionComponent = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [happiness, setHappiness] = useState<number>(0.5);
   const [count, setCount] = useState<number>(0);
-  const [question] = useState<string>('hello!');
+  const [thought, setThought] = useState<string>('😴');
   const [active, setActive] = useState<boolean>(false);
 
   // ~ hacks ~
-  //  https://stackoverflow.com/questions/64010671/accessing-state-from-callback
+  //  https://stackoverflow.com/thoughts/64010671/accessing-state-from-callback
   const counterRef = useRef(count);
   useEffect(() => { counterRef.current = count }, [count]);
 
@@ -47,7 +52,12 @@ export const Main: React.FunctionComponent = () => {
       .then((res) => res.data)
       .then((happinessResp) => happinessResp.happiness);
     setHappiness(happinessValue);
+    setThought(getRandomTurtlePun())
   };
+
+  const getRandomTurtlePun = () => {
+    return bukaBukaThoughts[Math.floor(Math.random() * bukaBukaThoughts.length)];
+  }
 
   const checkIfClassActive = async () => {
     const awake = await axios
@@ -61,14 +71,17 @@ export const Main: React.FunctionComponent = () => {
     socket.on('happiness', (happiness: number) => {
       setHappiness(happiness);
       setCount(counterRef.current + 1);
+      setThought(getRandomTurtlePun());
     });
     socket.on('awake', () => {
       setActive(true);
       setCount(counterRef.current + 1);
+      setThought(getRandomTurtlePun());
     });
     socket.on('sleep', () => {
       setActive(false);
       setCount(counterRef.current + 1);
+      setThought('😴');
     });
   }, []);
 
@@ -92,8 +105,8 @@ export const Main: React.FunctionComponent = () => {
   const buka_size = Math.trunc(happiness * 10) + 1;
 
   const text = loaded
-    ? question
-      ? question
+    ? thought
+      ? thought
       : "this is buka buka the turtle. buka buka loves GET and POST requests from codenext. no requests make buka buka sad. you don't want to make buka buka sad."
     : 'buka buka cannot be reached. the codenext staff is saddened.';
 
