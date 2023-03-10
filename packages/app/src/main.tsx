@@ -18,7 +18,7 @@ const bukaBukaThoughts = [
   "i'm awake! quick! run for shell-ter",
   "what do you call a famous turtle? a shell-lebrity",
   "what kind of photos does a turtle take? shellfies",
-  "what does a turtle do their birthday? they shell-lebrate",
+  "what does a turtle do their birthday? they shell-ebrate",
 ];
 
 const images = {
